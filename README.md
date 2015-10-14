@@ -9,15 +9,17 @@ ID -> id
 E -> int | E + E | E * E | E - E | ID | ID = E | write E | read ID
 
 The plan is:
- Assignment  will be semantically treated as an expression in which the RHS value is stored in the location on the LHS.
- Write will semantically take an expression as input and writes its value to the standard output.
- Read will semantically take an identifier as input and reads a line from the standard input. Then the value read is stored in the location specified 
- by the identifier
- The type of variable introduction, assignment, read and write could be unit or void in the type system. There could be a unit constant introduced but currently I can't see a need for one. May be the solution will be refined.
+ * Assignment  will be semantically treated as an expression in which the RHS value is stored in the location on the LHS.
+ * Write will semantically take an expression as input and writes its value to the standard output.
+ * Read will semantically take an identifier as input and reads a line from the standard input. Then the value read is stored in the location 
+   specified by the identifier
+ * The type of variable introduction, assignment, read and write could be unit or void in the type system. There could be a unit constant introduced
+   but currently I can't see a need for one. May be the solution will be refined.
 
 #Building Instructions
 
-The build command that is used to build the parser is: ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core lan\_test.native
+The build command that is used to build the parser is: 
+\*ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core lan\_test.native\*
 
 The Core standard library is required.
 
