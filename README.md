@@ -29,12 +29,12 @@ The Core standard library is required.
 
 In order to run the test suite type 
 ```
-./lan\_test.native test
+./lan_test.native test
 ```
 
 In order to run the parser in interactive mode where expressions can be provided to the standard input and then parsed type 
 ```
-./lan\_test.native
+./lan_test.native
 ```
 #Data Structure Used
 
