@@ -22,7 +22,7 @@ The plan is:
 
 The build command that is used to build the parser is: 
 ```
-ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core lan\_test.native\*
+ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core lan\_test.native
 ```
 
 The Core standard library is required.
