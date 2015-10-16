@@ -4,9 +4,11 @@
 
 This is a parser for a toy programming language designed for a university commitment.The grammar at the moment is very simple and the language consists of semicolon seperated list of expressions.The Dragon book convention is used for specifying terminals and non-terminals (lower-case and upper-case respecitvely) 
 
+```
 S -> empty | E;
 ID -> id
 E -> int | E + E | E * E | E - E | ID | ID = E | write E | read ID
+```
 
 The plan is:
  * Assignment  will be semantically treated as an expression in which the RHS value is stored in the location on the LHS.
@@ -19,14 +21,21 @@ The plan is:
 #Building Instructions
 
 The build command that is used to build the parser is: 
-\*ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core lan\_test.native\*
+```
+ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core lan\_test.native\*
+```
 
 The Core standard library is required.
 
-In order to run the test suite type ./lan\_test.native test
+In order to run the test suite type 
+```
+./lan_test.native test
+```
 
-In order to run the parser in interactive mode where expressions can be provided to the standard input and then parsed type ./lan\_test.native
-
+In order to run the parser in interactive mode where expressions can be provided to the standard input and then parsed type 
+```
+./lan_test.native
+```
 #Data Structure Used
 
 The AST that the parser outputs can be found in the file ast.ml and a print utility function can be found in astUtils.ml.
