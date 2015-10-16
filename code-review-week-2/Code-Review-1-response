@@ -1,0 +1,20 @@
+Good things
+
+Well defined tree structure, is nice, works well and easy to add to in future
+
+Very comprehensive testing - pretty much everything has a test case
+
+Support for reading/writing of variables is very good
+
+
+Need improvement
+
+Potential allowing input from files in the future: I agree there is not much sense of having a compiler that does not allow input from files. I 
+have prioritised testing for the time being as I believe it is important in the early stages. However, in the future input from files should be 
+incorporated.
+
+
+Tests could do with going into their own file of files to prevent exponential code growth in the future: This is something that I consider doing as
+well. In the case of simple expressions testing with one line fragments is easy. When it comes to larger programmes, then different files would be the better option.
+
+Language could to with expanding as is currently very small: That is definitely true. The idea was to create a very small but exentsible subset that would allow me to set up the boiler-plate code. Now there will be a focus on expansion and front-end optimisations. But again, I do agree that this is simply a language of describing arithmetic expressions with free identifiers. This is not a general purpose programming language. And there, indeed, is ambiguity related with scope, and the lack of brackets is definitely a drawback.
