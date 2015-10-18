@@ -8,6 +8,14 @@ type exp = Int of int
            | Plus of (exp * exp)
            | Minus of (exp * exp)
            | Times of (exp * exp)
+           | Div of (exp * exp)
+           | And of (exp * exp)
+           | Or of (exp * exp)
+           | Gt of (exp * exp)
+           | Lt of (exp * exp)
+           | Eq of (exp * exp)
+           | Not of exp
+           | IfThenElse of (exp * exp * exp)
            | Assign of (id * exp)
            | Read of id
            | Write of exp 

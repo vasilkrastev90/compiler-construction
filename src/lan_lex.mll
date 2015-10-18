@@ -17,6 +17,20 @@ rule read =
    | '+' {PLUS}
    | '-' {MINUS}
    | '*' {TIMES}
+   | "div" {DIV}
+   | '('  {LBRACKET}
+   | ')'  {RBRACKET}
+   | '!'  {NOT}
+   | "&&" {AND}
+   | "||" {OR}
+   | "<" {LT}
+   | ">" {GT}
+   | "==" {EQ}
+   | "let" {LET}
+   | "in"  {IN}
+   | "if" {IF}
+   | "then" {THEN}
+   | "else" {ELSE}
    | ';' {SEMICOLON}
    | "print" {WRITE}
    | "read"  {READ}

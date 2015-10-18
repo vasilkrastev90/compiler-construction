@@ -18,7 +18,7 @@ let rec print_exp e n = match e with
 | Assign (id,e1) ->print_spaces n; print_string "=\n";print_id id (n+1); print_exp e1 (n+1)
 | Read id -> print_spaces n; print_string "Read\n"; print_id id (n+1)
 | Write e1 ->  print_spaces n; print_string "Write\n"; print_exp e1 (n+1)
-
+| _ -> ()
  
  
 let rec print_progr es = match es with
