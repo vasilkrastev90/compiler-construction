@@ -18,6 +18,7 @@ rule read =
    | '-' {MINUS}
    | '*' {TIMES}
    | "div" {DIV}
+   | "mod" {MOD}
    | '('  {LBRACKET}
    | ')'  {RBRACKET}
    | '!'  {NOT}
@@ -31,6 +32,8 @@ rule read =
    | "if" {IF}
    | "then" {THEN}
    | "else" {ELSE}
+   | "\\" {LAMBDA}
+   | "->" {ARROW}
    | ';' {SEMICOLON}
    | "print" {WRITE}
    | "read"  {READ}

@@ -9,6 +9,7 @@ type exp = Int of int
            | Minus of (exp * exp)
            | Times of (exp * exp)
            | Div of (exp * exp)
+           | Mod of (exp * exp)
            | And of (exp * exp)
            | Or of (exp * exp)
            | Gt of (exp * exp)
@@ -16,6 +17,8 @@ type exp = Int of int
            | Eq of (exp * exp)
            | Not of exp
            | IfThenElse of (exp * exp * exp)
+           | Apply of (exp * exp)
+           | Lambda of (id * exp)
            | Assign of (id * exp * exp)
            | Read of id
            | Write of exp 
