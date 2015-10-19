@@ -1,1 +1,1 @@
-id + id
+let foo = id + id

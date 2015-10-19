@@ -1,1 +1,1 @@
-read 3
+let foo = read 3

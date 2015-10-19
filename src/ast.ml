@@ -16,8 +16,12 @@ type exp = Int of int
            | Eq of (exp * exp)
            | Not of exp
            | IfThenElse of (exp * exp * exp)
-           | Assign of (id * exp)
+           | Assign of (id * exp * exp)
            | Read of id
            | Write of exp 
 
-type program = exp list
+type arg = id
+
+type func = Function of (id * arg list * exp list)
+
+type program = func list

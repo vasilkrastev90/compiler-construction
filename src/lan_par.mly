@@ -1,7 +1,6 @@
 %{open Ast %}
 %token <int> INT
 %token <string> ID
-%token ASSIGN 
 %token PLUS
 %token MINUS
 %token TIMES
@@ -17,24 +16,41 @@
 %token SEMICOLON
 %token RBRACKET
 %token LBRACKET
+%token ASSIGN
 %token LET
 %token IN
 %token IF
 %token THEN
 %token ELSE
 %token EOF
-%right ASSIGN
-%left MINUS
-%left PLUS
-%left TIMES
+%nonassoc ELSE
+%nonassoc LT GT EQ
+%left MINUS PLUS
+%left TIMES DIV
+%left AND OR
+%right NOT
 %left READ
 %left WRITE
 %start <Ast.program> top
 %%
 
 top:
-  | ls = separated_list(SEMICOLON, exp); EOF {ls}
- 
+  | ls = separated_list(SEMICOLON, func); EOF {ls}
+
+explist:
+  | ls = separated_list(SEMICOLON, exp) {ls}  
+
+revarglist:
+  | (*empty*){[]}
+  | ls = arglist; var = ID {(Id var)::ls}
+
+
+arglist: 
+  | ls = revarglist {List.rev ls}
+
+
+func:
+  | LET; var = ID; args = arglist; ASSIGN; es = explist {Function(Id var,args,es)}
 
 exp:
   | i = INT {Int i}
@@ -51,6 +67,6 @@ exp:
   | LBRACKET; e1 = exp; RBRACKET {e1}  
   | IF; e1 = exp; THEN; e2 = exp; ELSE; e3 = exp {IfThenElse(e1,e2,e3)}
   | var = ID  {IdExp (Id var)}
-  | var = ID; ASSIGN; e1 = exp  {Assign (Id var,e1)}
+  | LET; var = ID; ASSIGN; e1 = exp; IN; e2=exp  {Assign(Id var,e1,e2)}
   | WRITE; e1=exp  {Write e1}
   | READ;  var=ID  {Read (Id var)}

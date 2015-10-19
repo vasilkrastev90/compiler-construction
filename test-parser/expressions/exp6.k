@@ -1,1 +1,1 @@
-print id
+let foo = print id
