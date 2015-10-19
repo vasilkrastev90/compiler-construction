@@ -25,27 +25,38 @@
 %token ELSE
 %token LAMBDA
 %token ARROW
+%token BEGIN
+%token END
+%token APPLY
 %token EOF
+%nonassoc IN ARROW
 %nonassoc ELSE
 %nonassoc LT GT EQ
 %left MINUS PLUS
 %left TIMES DIV MOD
 %left AND OR
 %right NOT
-%left READ
+%left APPLY
 %left WRITE
 %start <Ast.program> top
 %%
 
 top:
-  | ls = separated_list(SEMICOLON, func); EOF {ls}
+  | ls = funclist {ls}
+
+revfunclist:
+  | (*empty *) {[]}
+  | ls = revfunclist; f = func {f :: ls}
+
+funclist: 
+  | ls = revfunclist; EOF {List.rev ls}
 
 explist:
-  | ls = separated_list(SEMICOLON, exp) {ls}  
+  |ls = separated_list(SEMICOLON, exp) {ls}  
 
 revarglist:
   | (*empty*){[]}
-  | ls = arglist; var = ID {(Id var)::ls}
+  | ls = revarglist; var = ID {(Id var)::ls}
 
 
 arglist: 
@@ -53,7 +64,7 @@ arglist:
 
 
 func:
-  | LET; var = ID; args = arglist; ASSIGN; es = explist {Function(Id var,args,es)}
+  | LET; var = ID; args = arglist; ASSIGN; BEGIN; es = explist; END {Function(Id var,args,es)}
 
 exp:
   | i = INT {Int i}
@@ -70,7 +81,7 @@ exp:
   | NOT; e1 = exp {Not e1}
   | LBRACKET; e1 = exp; RBRACKET {e1}  
   | IF; e1 = exp; THEN; e2 = exp; ELSE; e3 = exp {IfThenElse(e1,e2,e3)}
-  | m = exp; n = exp {Apply (m,n)}
+  | APPLY m = exp; n = exp {Apply (m,n)}
   | LAMBDA; arg = ID; ARROW; e1 = exp {Lambda(Id arg,e1)}
   | var = ID  {IdExp (Id var)}
   | LET; var = ID; ASSIGN; e1 = exp; IN; e2=exp  {Assign(Id var,e1,e2)}

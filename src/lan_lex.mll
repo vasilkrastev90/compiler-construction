@@ -34,6 +34,9 @@ rule read =
    | "else" {ELSE}
    | "\\" {LAMBDA}
    | "->" {ARROW}
+   | "begin" {BEGIN}
+   | "end"   {END}
+   | "apply" {APPLY}
    | ';' {SEMICOLON}
    | "print" {WRITE}
    | "read"  {READ}
