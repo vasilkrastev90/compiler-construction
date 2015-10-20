@@ -1,4 +1,5 @@
 *.native
 *sw*
+*~
 json-parser
 _build
