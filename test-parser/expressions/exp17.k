@@ -1,1 +1,1 @@
-let foo = 3++5
+let foo = begin 3++5 end

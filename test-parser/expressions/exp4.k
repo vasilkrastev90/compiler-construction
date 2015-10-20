@@ -1,1 +1,1 @@
-let foo = id
+let foo = begin id end

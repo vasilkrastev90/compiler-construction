@@ -1,1 +1,1 @@
-let foo = if 1 print true else false
+let foo = begin if 1 print true else false end

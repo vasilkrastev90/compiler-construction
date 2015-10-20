@@ -1,1 +1,1 @@
-let foo = if a || 3 then print success
+let foo = begin if a || 3 then print success end

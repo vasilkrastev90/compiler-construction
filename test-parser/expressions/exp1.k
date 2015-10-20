@@ -1,1 +1,1 @@
-let foo = 3+4
+let foo = begin 3+4 end

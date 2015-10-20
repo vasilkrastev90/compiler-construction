@@ -1,1 +1,1 @@
-let foo = read id
+let foo = begin read id end

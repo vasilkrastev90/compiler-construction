@@ -1,1 +1,1 @@
-let foo = x==3
+let foo = begin x===3 end
