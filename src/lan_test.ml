@@ -46,9 +46,8 @@ let execute_tests directoryPath fileName =
     let result = ref "" in
     read_file program result;
     let fileInfo  = Hashtbl.find fileToAstMap fileName in
-    print_string fileInfo.formatString;  
     parse_with_error (Lexing.from_string !result) = fileInfo.ast 
-           |> printf ("%B\n");
+           |> printf "the program in %s should parsed as exptected: %B\n" fileName;
     close_in program
     
 let _ = if Array.length Sys.argv >1  && Sys.argv.(1) = "test-parser" then 
