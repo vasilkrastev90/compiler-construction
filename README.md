@@ -5,9 +5,12 @@
 This is a parser for a toy programming language designed for a university commitment.The grammar at the moment is very simple and the language consists of semicolon seperated list of expressions.The Dragon book convention is used for specifying terminals and non-terminals (lower-case and upper-case respecitvely) 
 
 ```
-S -> empty | E;
+S -> empty | FunList;
+FunList -> empty | Fun FunList
+Fun -> let argList = begin Elist End
+Elist -> empty | E EList
 ID -> id
-E -> int | E + E | E * E | E - E | ID | ID = E | write E | read ID
+E -> int | E + E | E * E | E - E | E div E | E mod E |E && E | E '||' E | !E | E < E | E > E | E==E  | ID | let ID = E in E | write E | read ID | if E then E else E | apply E E | \ID -> E | (E)
 ```
 
 The plan is:
