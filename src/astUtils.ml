@@ -10,7 +10,6 @@ let print_id id n = match id with
 
 let rec print_exp e n = match e with
 | Int i -> print_spaces n; printf "Int %d\n" i
-| String s ->print_spaces n; printf "String %s\n" s
 | IdExp id -> print_spaces n; print_string("IdExp\n"); print_id id (n+1)
 | Plus (e1,e2) -> print_spaces n; print_string "Plus\n"; print_exp e1 (n+1); print_exp e2 (n+1)
 | Minus (e1,e2) -> print_spaces n; print_string "Minus\n"; print_exp e1 (n+1); print_exp e2 (n+1)

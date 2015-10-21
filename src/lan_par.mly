@@ -42,14 +42,14 @@
 %%
 
 top:
-  | ls = funclist {ls}
+  | ls = funclist EOF {ls}
 
 revfunclist:
   | (*empty *) {[]}
   | ls = revfunclist; f = func {f :: ls}
 
 funclist: 
-  | ls = revfunclist; EOF {List.rev ls}
+  | ls = revfunclist; {List.rev ls}
 
 explist:
   |ls = separated_list(SEMICOLON, exp) {ls}  
