@@ -52,7 +52,7 @@ let execute_tests directorypath filename compile_function optimisation_function 
     compile_function (Lexing.from_string !result) = fileInfo.ast 
            |> printf "the program in %s should parsed as exptected: %B\n" filename;
     if is_optimisable then let optFileInfo = Hashtbl.find fileToAstMap (filename ^ "-opt") in
-      Lexing.from_string !result |> compile_function |> optimisation_function = optFileInfo.ast |> printf ("the programe in %s should be optimised as  expected: %B\n") filename;
+      Lexing.from_string !result |> compile_function |> optimisation_function = optFileInfo.ast |> printf ("the program in %s should be optimised as  expected: %B\n") filename;
     else ();
     close_in program
 

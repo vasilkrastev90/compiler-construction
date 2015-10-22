@@ -1,8 +1,8 @@
-open Ast
-open AstUtils
+
+pen AstUtils
 
 let rec propagate_constant_int id n e = match e with
-| Int n' -> Int n'
+| Int n -> Int n
 | IdExp x -> if x=id then Int n else IdExp x
 | Plus (e1,e2) -> Plus (propagate_constant_int id n e1, propagate_constant_int id n e2)
 | Minus (e1,e2) -> Minus (propagate_constant_int id n e1, propagate_constant_int id n  e2)
@@ -22,6 +22,12 @@ let rec propagate_constant_int id n e = match e with
 | Read id' -> Read id'
 | Write e1 -> Write (propagate_constant_int id n e1)
 
+
+(*
+let propagate_if_constant id e1 e2 = match e1 with 
+| Int n -> propagate_constant_int id n e2  
+| x -> e2
+*)
 
 let rec const_prop_exp exp = match exp with
 | Int n -> Int (n)
