@@ -25,34 +25,34 @@ The plan is:
 
 The build command that is used to build the parser is: 
 ```
-ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core -I src -I test-parser -r  lan_test.native
+ocamlbuild -use-menhir -tag thread -use-ocamlfind -pkg core -I src -r  lan_test.native
 ```
 
 The Core standard library is required.
 
 In order to run the test suite type 
 ```
-./lan_test.native <test-files-dir> <dir1 dir2 dir3 .. dir n>
-```
-Where test-files dir is the directory containing the test directories relative to the current directory.
-
-And dir1-n are the directories withing the testing directory.
-
-In this repo the parent directory is test-parser and there are three subdirectories expressions, functions and integration. So in order to run:
-
-```
-./lan_test.native test-parser expressions functions integration 
+./lan_test.native test <test-directory> 
 ```
 
-or if you want to run a single test directory
+```
+./lan_test.native test ./test-optimisation/ 
+```
+
+or if you want to run the tests and compare them against the fe-optimisations
 
 ```
-./lan_test.native test-parser expressions
+./lan_test.native test ./test-optimisation --fe-opt
 ```
 
 In order to run the parser in interactive mode where expressions can be provided to the standard input and then parsed type 
 ```
-./lan_test.native
+./lan_test.native interact
+```
+
+In order to run the parser on a single file and get output on the parsed input type
+```
+./lan_test.native interact --directory <dirname> --filename <filename> <--fe-opt>
 ```
 #Data Structure Used
 
