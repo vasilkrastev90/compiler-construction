@@ -31,6 +31,7 @@ let createTable  =
     Hashtbl.add fileToAstMap "exp15.k" {ast = [];};
     Hashtbl.add fileToAstMap "exp16.k" {ast = [];};
     Hashtbl.add fileToAstMap "exp17.k" {ast = [];};
+    Hashtbl.add fileToAstMap "exp18.k" {ast = [];};
     Hashtbl.add fileToAstMap "exp20.k" {ast = [];};
     Hashtbl.add fileToAstMap "exp21.k" {ast = [];};
     Hashtbl.add fileToAstMap "lambda1.k" {ast = [];};
