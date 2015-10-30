@@ -42,7 +42,13 @@ In order to run the test suite type
 or if you want to run the tests and compare them against the fe-optimisations
 
 ```
-./lan_test.native test ./test-optimisation --fe-opt
+./lan_test.native test ./test-optimisation/ --fe-opt
+```
+
+In order to generate assembly files and test run their runtime tests run the following.
+
+```
+./lan_test.native test ./test-codegen/ --code-gen`
 ```
 
 In order to run the parser in interactive mode where expressions can be provided to the standard input and then parsed type 
@@ -54,6 +60,41 @@ In order to run the parser on a single file and get output on the parsed input t
 ```
 ./lan_test.native interact --directory <dirname> --filename <filename> <--fe-opt>
 ```
+#Frontend Optimisations
+The compiler currently supports the following frontend optimisations:
+*Constant Folding
+
+*Constant Propagation
+
+*Function Inlining
+-function inlining is used in the case when we have an assignment to a function or a lambda abstraction and the function, or variable in the lambda abstraction is used only once in the rest of the code. then we know it is safe to inline.
+
+i.e. apply (\x -> apply x 3) (\b -> b+1)
+     would be optimised to apply (\b->b+1) 3
+      
+     let f = (\x -> x +1 ) in
+     apply f 4
+     would be optimised to
+     apply (\x -> x + 1) 4
+     which would be constant folded to:
+     5
+    
+
+#Code Generation
+Currently code is generated for AMD64 instruction set and has been tested on Ubuntu 14.04.
+
+Currently expressions of the basic arithmetic operators are handled, and runtime tests are supported. The runtime tests use the return value of the system command that executes the assebmly file. The results of the rexpression is stored in the rax register, and then we could read it in the our ocaml program.
+
+Alghough suboptimal this way of testing allows for the test of infinite amount of expressions.
+
+#Benchmarking
+The execution time of the programs was compared against the execution time of interpreted ocaml code.
+
+Currently when code generation is tested the time taken to execute the system call which executes the assembly file is measured. This allows for benchmarking to some extent, but there will be a necessity for improvements in the future as this is not completely accurate.
+
+However, the framework available for testing is quite powerful and would allow for easily adding tweaks in the future.
+
+
 #Data Structure Used
 
 The AST that the parser outputs can be found in the file ast.ml and a print utility function can be found in astUtils.ml.
