@@ -85,4 +85,5 @@ let createTable  =
     Hashtbl.add fileToAstMap "simple-expression-to-generate3.k-opt"{ast = [];};
     Hashtbl.add fileToAstMap "simple-expression-to-generate4.k" {ast = [];};
     Hashtbl.add fileToAstMap "simple-expression-to-generate4.k-opt"{ast = [];};
+    Hashtbl.add fileToAstMap "expression1.k"{ast = [];};
 

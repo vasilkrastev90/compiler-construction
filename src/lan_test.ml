@@ -60,7 +60,10 @@ let execute_tests directorypath filename compile_function optimisation_function 
       fprintf oc "%s\n" assemblyCode;
       close_out oc;
       let _ =sprintf "gcc  %s -o %s" ("./assembly-output/"^filenameAssembly^".s") ("./assembly-output/"^filenameAssembly) |> command in
-      command ("./assembly-output/"^filenameAssembly^" > /dev/null") = fileAssemblyInfo.value |>
+      let time = Sys.time () in
+      let result = command ("./assembly-output/"^filenameAssembly^" > /dev/null") in
+      printf ("time of execution: %f\n") (Sys.time()-.time);
+      result  = fileAssemblyInfo.value |>
       printf ("The expression for %s evaluates as expected %b\n") filenameAssembly
       end
       else
