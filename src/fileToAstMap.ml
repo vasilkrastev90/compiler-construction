@@ -77,3 +77,12 @@ let createTable  =
     Hashtbl.add fileToAstMap "lambda-expression6.k-opt" {ast = [Function(Id "foo",[],[Assign(Id "x",Lambda(Id "a",Plus(IdExp(Id "a"),Int 2)),Plus(Apply(IdExp(Id "x"),IdExp(Id "y" )),Apply(IdExp(Id "x"),IdExp(Id "z"))))])];};
     Hashtbl.add fileToAstMap "fun-args1.k" {ast = [];};
     Hashtbl.add fileToAstMap "fun-args1.k-opt" {ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate1.k" {ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate1.k-opt"{ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate2.k" {ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate2.k-opt"{ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate3.k" {ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate3.k-opt"{ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate4.k" {ast = [];};
+    Hashtbl.add fileToAstMap "simple-expression-to-generate4.k-opt"{ast = [];};
+
