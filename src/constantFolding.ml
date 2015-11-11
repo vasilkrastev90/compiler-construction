@@ -23,7 +23,7 @@ let rec fold_const_exp e = match e with
 | IfThenElse (e1,e2,e3) -> IfThenElse(fold_const_exp e1, fold_const_exp e2, fold_const_exp e3)
 | Apply (e1,e2) -> Apply(fold_const_exp e1, fold_const_exp e2)
 | Lambda (id,e1) -> Lambda(id, fold_const_exp e1)
-| Assign (id,e1,e2) -> Assign(id, fold_const_exp e1, fold_const_exp e2)
+| Assign (id,e1) -> Assign(id, fold_const_exp e1)
 | Read id -> Read id
 | Write e1 -> Write (fold_const_exp e1)
 
@@ -34,7 +34,7 @@ let rec fold_const_expls expls = match expls with
 
 
 let fold_const_func f = match f with
-| Function (x,argls,expls) -> Function(x,argls, fold_const_expls expls)
+| Function (x,argls,decs,expls) -> Function(x,argls,decs,fold_const_expls expls)
 
 let rec fold_const_function_list ast = match ast with
 | hd::tl -> fold_const_func hd :: fold_const_function_list tl

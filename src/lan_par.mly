@@ -63,8 +63,14 @@ arglist:
   | ls = revarglist {List.rev ls}
 
 
+dec: 
+  | LET; var = ID; ASSIGN; e1 = exp; {Dec(Id var,e1)}
+
+declist:  
+  | ls = separated_list(SEMICOLON,dec) {ls}
+
 func:
-  | LET; var = ID; args = arglist; ASSIGN; BEGIN; es = explist; END {Function(Id var,args,es)}
+  | LET; var = ID; args = arglist; ASSIGN; BEGIN; decs = declist es = explist; END {Function(Id var,args,decs,es)}
 
 exp:
   | i = INT {Int i}
@@ -84,6 +90,6 @@ exp:
   | APPLY m = exp; n = exp {Apply (m,n)}
   | LAMBDA; arg = ID; ARROW; e1 = exp {Lambda(Id arg,e1)}
   | var = ID  {IdExp (Id var)}
-  | LET; var = ID; ASSIGN; e1 = exp; IN; e2=exp  {Assign(Id var,e1,e2)}
+  | var = ID ASSIGN e1=exp  {Assign(Id var,e1)}
   | WRITE; e1=exp  {Write e1}
   | READ;  var=ID  {Read (Id var)}

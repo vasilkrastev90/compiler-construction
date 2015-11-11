@@ -12,8 +12,8 @@ ast: Ast.program;
 
 let fileToAstMap = Hashtbl.create 500
 let createTable  = 
-   Hashtbl.add fileToAstMap "exp1.k" {ast = [Function(Id "foo",[],[Plus (Int 3, Int 4)])];};
-   Hashtbl.add fileToAstMap "exp2.k" {ast = [Function(Id "foo", [],[Plus (Times (Int 21,Int 5), Int 7)])] ;};
+   Hashtbl.add fileToAstMap "exp1.k" {ast = [];};
+(*   Hashtbl.add fileToAstMap "exp2.k" {ast = [Function(Id "foo", [],[Plus (Times (Int 21,Int 5), Int 7)])] ;};
    Hashtbl.add fileToAstMap "exp3.k" {ast =[Function(Id "foo",[],[Minus(Plus (Times (Int 21, Int 2),Int 5),Times(Int 3,Int 4))])];};
    Hashtbl.add fileToAstMap "exp4.k" {ast = [Function(Id "foo", [], [IdExp (Id "id")])];};
    Hashtbl.add fileToAstMap "exp5.k" {ast = [Function(Id "foo", [],[Plus(IdExp(Id "id/"), IdExp (Id "id"))])];};
@@ -86,4 +86,4 @@ let createTable  =
     Hashtbl.add fileToAstMap "simple-expression-to-generate4.k" {ast = [];};
     Hashtbl.add fileToAstMap "simple-expression-to-generate4.k-opt"{ast = [];};
     Hashtbl.add fileToAstMap "expression1.k"{ast = [];};
-
+*)

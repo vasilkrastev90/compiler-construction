@@ -1,7 +1,7 @@
 open Ast
 open AstUtils
 
-let rec inline_function_int id lambda_function e = match e with
+(*let rec inline_function_int id lambda_function e = match e with
 | Int n -> Int n
 | IdExp x -> IdExp x
 | Plus (e1,e2) -> Plus (inline_function_int id lambda_function e1, inline_function_int id lambda_function e2)
@@ -80,11 +80,12 @@ let rec inline_expls expls = match expls with
 
 
 let inline_func f = match f with
-| Function (x,argls,expls) -> Function(x,argls, inline_expls expls)
+| Function (x,argls,expls) -> Function(x,argls, inline_expls expls)*)
 
-let rec inline_function_list ast = match ast with
+let rec inline_function_list ast = ast 
+(*match ast with
 | hd::tl -> inline_func hd :: inline_function_list tl
-| [] -> []
+| [] -> []*)
 
 let inline = inline_function_list
 

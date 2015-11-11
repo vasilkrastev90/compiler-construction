@@ -18,7 +18,7 @@ let rec propagate_constant_int id n e = match e with
 | IfThenElse (e1,e2,e3) -> IfThenElse(propagate_constant_int id n e1, propagate_constant_int id n e2, propagate_constant_int id n e3)
 | Apply (e1,e2) -> Apply(propagate_constant_int id n e1, propagate_constant_int id n e2)
 | Lambda (id',e1) -> if id'=id then Lambda(id',e1) else Lambda(id',propagate_constant_int id n e1)
-| Assign (id',e1,e2) -> if id'=id then Assign(id',e1,e2) else Assign(id' ,propagate_constant_int id n e1, propagate_constant_int id n e2) 
+| Assign (id',e1) -> if id'=id then Assign(id',e1) else Assign(id' ,propagate_constant_int id n e1) 
 | Read id' -> Read id'
 | Write e1 -> Write (propagate_constant_int id n e1)
 
@@ -41,8 +41,6 @@ let rec const_prop_exp exp = match exp with
 | Apply (Lambda (id,e1), Int n) -> propagate_constant_int id n e1 |> const_prop_exp
 | Apply (e1,e2) -> Apply(const_prop_exp e1, const_prop_exp e2)
 | Lambda (id,e2) -> Lambda(id, const_prop_exp e2)
-| Assign (id,Int n,e2) -> propagate_constant_int id n e2 |> const_prop_exp
-| Assign (id,e1,e2) -> (*think about that*)Assign(id,const_prop_exp e1, const_prop_exp e2)
 | Read id -> Read id
 | Write e1 -> Write (const_prop_exp e1)
 
@@ -52,7 +50,7 @@ let rec const_prop_expls expls = match expls with
 
 
 let const_prop_func f = match f with
-| Function (x,argls,expls) -> Function(x,argls, const_prop_expls expls)
+| Function (x,argls,decs,expls) -> Function(x,argls,decs ,const_prop_expls expls)
 
 let rec const_prop_function_list ast = match ast with
 | hd::tl -> const_prop_func hd :: const_prop_function_list tl

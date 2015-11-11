@@ -18,12 +18,15 @@ type exp = Int of int
            | IfThenElse of (exp * exp * exp)
            | Apply of (exp * exp)
            | Lambda of (id * exp)
-           | Assign of (id * exp * exp)
+           | Assign of (id * exp)
            | Read of id
            | Write of exp 
 
+
+type dec = Dec of (id * exp)          
+          
 type arg = id
 
-type func = Function of (id * arg list * exp list)
+type func = Function of (id * arg list * dec list * exp list)
 
 type program = func list

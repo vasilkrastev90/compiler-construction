@@ -81,7 +81,7 @@ let rec codegen_exp (e:exp) = match e with
 | Write _ -> failwith "TODO"
 
 let codegen_func (ast:func) = match ast with
-| Function (x,argList,explist) -> asm_prefix ^ (List.map codegen_exp explist |>  List.fold_left (^) " ") ^ asm_suffix
+| Function (x,argList,decList,explist) -> asm_prefix ^ (List.map codegen_exp explist |>  List.fold_left (^) " ") ^ asm_suffix
 
 let codegen_progr (ls:program) = match ls with
 | [] -> failwith "Currently not generating code for an empty program"
