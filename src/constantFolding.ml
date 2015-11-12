@@ -32,9 +32,12 @@ let rec fold_const_expls expls = match expls with
 | hd::tl -> fold_const_exp hd :: fold_const_expls tl
 | [] -> []
 
+let rec fold_const_decs decs = match decs with
+| Dec((Id id), e)::tl -> Dec((Id id), (fold_const_exp e)) :: fold_const_decs tl
+| [] -> []
 
 let fold_const_func f = match f with
-| Function (x,argls,decs,expls) -> Function(x,argls,decs,fold_const_expls expls)
+| Function (x,argls,decs,expls) -> Function(x,argls,fold_const_decs decs,fold_const_expls expls)
 
 let rec fold_const_function_list ast = match ast with
 | hd::tl -> fold_const_func hd :: fold_const_function_list tl

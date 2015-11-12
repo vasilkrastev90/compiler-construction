@@ -8,13 +8,18 @@
                   	pushq %rbp
                   	movq    %rsp, %rbp
                    	push $6
-	push $4
- 	push $5
-	pop %rsi
-                                     	mov %rsi, -8(%rbp)
-                                     	push %rsi
-                                    	 pop %rsi
-                            	push $3
+	push $3
+	pop %rdi
+              	pop %rsi
+              	add %rdi, %rsi
+              	push %rsi
+              	push $4
+	push $2
+	pop %rdi
+              	pop %rsi
+              	add %rdi, %rsi
+              	push %rsi
+               	push $3
 	pop %rsi
                                      	mov %rsi, -8(%rbp)
                                      	push %rsi
@@ -24,18 +29,18 @@
                                      	mov %rsi, -16(%rbp)
                                      	push %rsi
                                     	 pop %rsi
-                            	push $8
-	pop %rsi
-                                     	mov %rsi, -8(%rbp)
-                                     	push %rsi
-                                    	 pop %rsi
                             	 push -8(%rbp)
-                             	 push -8(%rbp)
+                             	 push -16(%rbp)
                              	pop %rdi
               	pop %rsi
               	add %rdi, %rsi
               	push %rsi
               	 pop %rsi
+                            	push $7
+	pop %rsi
+                                     	mov %rsi, -16(%rbp)
+                                     	push %rsi
+                                    	 pop %rsi
                             	push %rsi
                           	movl    $.LC0, %edi
                           	movl    $0, %eax

@@ -39,7 +39,7 @@ let rec print_es es n = match es with
 
 
 let print_dec (declaration:dec) = match declaration with
-| Dec (id,exp) -> print_string "TO BE IMPLEMENTED \n"
+| Dec (id,e) -> print_string "Dec:\n"; print_exp e 0 
 
 let print_decs decs = List.iter print_dec decs
 
