@@ -94,6 +94,11 @@ Currently when code generation is tested the time taken to execute the system ca
 
 However, the framework available for testing is quite powerful and would allow for easily adding tweaks in the future.
 
+Also the time function can be used with the assembly file manually and then the overhead from using a system call will be eliminated
+
+And finally for comparison here is how javascript deals with the benchmark expression: https://jsfiddle.net/pczhb2nw/
+
+
 
 #Data Structure Used
 
