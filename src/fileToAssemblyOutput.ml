@@ -16,3 +16,4 @@ Hashtbl.add fileToAssemblyMap "simple-expression-to-generate8.k" {value =32 };
 Hashtbl.add fileToAssemblyMap "simple-expression-to-generate9.k" {value = 99};
 Hashtbl.add fileToAssemblyMap "simple-expression-to-generate10.k"{value = 75 };
 Hashtbl.add fileToAssemblyMap "expression1.k"{value = 0 };
+Hashtbl.add fileToAssemblyMap "exp1.k"{value = 10 }

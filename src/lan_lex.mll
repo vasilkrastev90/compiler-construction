@@ -28,7 +28,8 @@ rule read =
    | ">" {GT}
    | "==" {EQ}
    | "let" {LET}
-   | "in"  {IN}
+   | "decl" {DECL}
+   | "lced" {LCED}
    | "if" {IF}
    | "then" {THEN}
    | "else" {ELSE}

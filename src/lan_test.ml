@@ -48,12 +48,11 @@ let rec loop_interactive compile_function optimisation_function is_optimisable b
 
 
 let execute_tests directorypath filename compile_function optimisation_function is_optimisable is_codegen_on =
-    if (is_codegen_on) then
     let program = directorypath ^ filename |> open_in in
     let result = ref "" in
     read_file program result;
     if is_codegen_on then begin
-      let fileAssemblyInfo  = Hashtbl.find fileToAssemblyMap filename in
+            let fileAssemblyInfo  = Hashtbl.find fileToAssemblyMap filename in
       let assemblyCode = Lexing.from_string !result |> compile_function |> codegen_progr in
       let filenameAssembly = String.sub filename 0 (String.length filename - 2) in
       let oc = open_out ("./assembly-output/"^filenameAssembly^".s") in
@@ -68,7 +67,7 @@ let execute_tests directorypath filename compile_function optimisation_function 
       end
       else
      begin
-       let fileInfo  = Hashtbl.find fileToAstMap filename in
+             let fileInfo  = {ast = [];}(*Hashtbl.find fileToAstMap filename*) in
        compile_function (Lexing.from_string !result) = fileInfo.ast 
           |> printf "the program in %s should parsed as exptected: %B\n" filename;
              if is_optimisable then let optFileInfo = Hashtbl.find fileToAstMap (filename ^ "-opt") in

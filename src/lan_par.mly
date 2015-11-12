@@ -19,7 +19,6 @@
 %token LBRACKET
 %token ASSIGN
 %token LET
-%token IN
 %token IF
 %token THEN
 %token ELSE
@@ -27,9 +26,11 @@
 %token ARROW
 %token BEGIN
 %token END
+%token DECL
+%token LCED
 %token APPLY
 %token EOF
-%nonassoc IN ARROW
+%nonassoc ARROW ASSIGN
 %nonassoc ELSE
 %nonassoc LT GT EQ
 %left MINUS PLUS
@@ -70,7 +71,7 @@ declist:
   | ls = separated_list(SEMICOLON,dec) {ls}
 
 func:
-  | LET; var = ID; args = arglist; ASSIGN; BEGIN; decs = declist es = explist; END {Function(Id var,args,decs,es)}
+  | LET; var = ID; args = arglist; ASSIGN; DECL decs = declist LCED BEGIN es = explist; END {Function(Id var,args,decs,es)}
 
 exp:
   | i = INT {Int i}
