@@ -53,7 +53,8 @@ let execute_tests directorypath filename compile_function optimisation_function 
     read_file program result;
     if is_codegen_on then begin
             let fileAssemblyInfo  = Hashtbl.find fileToAssemblyMap filename in
-      let assemblyCode = Lexing.from_string !result |> compile_function |> codegen_progr in
+      let assemblyCode = if (not is_optimisable) then Lexing.from_string !result |> compile_function |> codegen_progr else 
+                             Lexing.from_string !result |> compile_function |> optimisation_function |>codegen_progr in
       let filenameAssembly = String.sub filename 0 (String.length filename - 2) in
       let oc = open_out ("./assembly-output/"^filenameAssembly^".s") in
       fprintf oc "%s\n" assemblyCode;
