@@ -98,7 +98,7 @@ Also the time function can be used with the assembly file manually and then the 
 
 And finally for comparison here is how javascript deals with the benchmark expression: https://jsfiddle.net/pczhb2nw/
 
-
+JSFiddle for tomorrow: https://jsfiddle.net/3424bn7q/1/
 
 #Data Structure Used
 
