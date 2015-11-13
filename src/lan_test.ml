@@ -67,7 +67,7 @@ let execute_tests directorypath filename compile_function optimisation_function 
       end
       else
      begin
-             let fileInfo  = {ast = [];}(*Hashtbl.find fileToAstMap filename*) in
+             let fileInfo  = Hashtbl.find fileToAstMap filename in
        compile_function (Lexing.from_string !result) = fileInfo.ast 
           |> printf "the program in %s should parsed as exptected: %B\n" filename;
              if is_optimisable then let optFileInfo = Hashtbl.find fileToAstMap (filename ^ "-opt") in

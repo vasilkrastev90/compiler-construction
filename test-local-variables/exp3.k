@@ -4,6 +4,8 @@ let foo = decl
           lced
           begin
           a=3;
-          b=2; 
-          a+b 
+          b=2;
+          a+b;
+          b=7
           end
+

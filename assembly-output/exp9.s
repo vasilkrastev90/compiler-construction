@@ -36,6 +36,11 @@
               	add %rdi, %rsi
               	push %rsi
               	 pop %rsi
+                            	push $7
+	pop %rsi
+                                     	mov %rsi, -16(%rbp)
+                                     	push %rsi
+                                    	 pop %rsi
                             	push %rsi
                           	movl    $.LC0, %edi
                           	movl    $0, %eax
