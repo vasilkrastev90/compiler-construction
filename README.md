@@ -102,6 +102,8 @@ And finally for comparison here is how javascript deals with the benchmark expre
 
 Comparison against javascript when testing local variables implementation: https://jsfiddle.net/3424bn7q/2/
 
+Comparison against javascript when testing runtime functions implementation: https://jsfiddle.net/a8ncwekx/2/
+
 #Data Structure Used
 
 The AST that the parser outputs can be found in the file ast.ml and a print utility function can be found in astUtils.ml.
