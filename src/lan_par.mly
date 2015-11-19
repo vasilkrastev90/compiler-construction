@@ -28,8 +28,8 @@
 %token END
 %token DECL
 %token LCED
-%token APPLY
 %token EOF
+%token COMMA
 %nonassoc ARROW ASSIGN
 %nonassoc ELSE
 %nonassoc LT GT EQ
@@ -37,7 +37,6 @@
 %left TIMES DIV MOD
 %left AND OR
 %right NOT
-%left APPLY
 %left WRITE
 %start <Ast.program> top
 %%
@@ -54,6 +53,9 @@ funclist:
 
 explist:
   |ls = separated_list(SEMICOLON, exp) {ls}  
+
+argexplist:
+  |ls = separated_list(COMMA, exp) {ls}
 
 revarglist:
   | (*empty*){[]}
@@ -88,7 +90,7 @@ exp:
   | NOT; e1 = exp {Not e1}
   | LBRACKET; e1 = exp; RBRACKET {e1}  
   | IF; e1 = exp; THEN; e2 = exp; ELSE; e3 = exp {IfThenElse(e1,e2,e3)}
-  | APPLY m = exp; n = exp {Apply (m,n)}
+  | var = ID; LBRACKET; args = argexplist; RBRACKET {Apply (Id(var),args)}
   | LAMBDA; arg = ID; ARROW; e1 = exp {Lambda(Id arg,e1)}
   | var = ID  {IdExp (Id var)}
   | var = ID ASSIGN e1=exp  {Assign(Id var,e1)}

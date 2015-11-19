@@ -27,3 +27,6 @@ Hashtbl.add fileToAssemblyMap "exp8.k"{value = 7 };
 Hashtbl.add fileToAssemblyMap "exp9.k"{value = 7 };
 Hashtbl.add fileToAssemblyMap "exp0.k"{value = 7 };
 Hashtbl.add fileToAssemblyMap "expression-local-var.k" {value = 0 };
+Hashtbl.add fileToAssemblyMap "fun1.k" {value = 14};
+Hashtbl.add fileToAssemblyMap "fun2.k" {value = 3};
+

@@ -21,14 +21,13 @@ let rec fold_const_exp e = match e with
 | Eq (e1,e2) -> Eq (fold_const_exp e1, fold_const_exp e2)
 | Not e1 -> Not (fold_const_exp e1)
 | IfThenElse (e1,e2,e3) -> IfThenElse(fold_const_exp e1, fold_const_exp e2, fold_const_exp e3)
-| Apply (e1,e2) -> Apply(fold_const_exp e1, fold_const_exp e2)
+| Apply (id,es) -> Apply(id,fold_const_expls es)
 | Lambda (id,e1) -> Lambda(id, fold_const_exp e1)
 | Assign (id,e1) -> Assign(id, fold_const_exp e1)
 | Read id -> Read id
 | Write e1 -> Write (fold_const_exp e1)
-
-
-let rec fold_const_expls expls = match expls with
+and
+fold_const_expls expls = match expls with
 | hd::tl -> fold_const_exp hd :: fold_const_expls tl
 | [] -> []
 

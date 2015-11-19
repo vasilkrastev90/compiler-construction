@@ -21,6 +21,7 @@ rule read =
    | "mod" {MOD}
    | '('  {LBRACKET}
    | ')'  {RBRACKET}
+   | ','  {COMMA}
    | '!'  {NOT}
    | "&&" {AND}
    | "||" {OR}
@@ -37,7 +38,6 @@ rule read =
    | "->" {ARROW}
    | "begin" {BEGIN}
    | "end"   {END}
-   | "apply" {APPLY}
    | ';' {SEMICOLON}
    | "print" {WRITE}
    | "read"  {READ}

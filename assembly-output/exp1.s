@@ -21,16 +21,16 @@
               	push %rsi
                	push $3
 	pop %rsi
-                                     	mov %rsi, -8(%rbp)
+                                     	mov %rsi, -0(%rbp)
                                      	push %rsi
                                     	 pop %rsi
                             	push $2
 	pop %rsi
-                                     	mov %rsi, -16(%rbp)
+                                     	mov %rsi, -8(%rbp)
                                      	push %rsi
                                     	 pop %rsi
-                            	 push -8(%rbp)
-                             	 push -16(%rbp)
+                            	 push -0(%rbp)
+                             	 push -8(%rbp)
                              	pop %rdi
               	pop %rsi
               	add %rdi, %rsi
@@ -49,3 +49,5 @@
                           	.ident  "GCC: (Ubuntu 4.8.4-2ubuntu1~14.04) 4.8.4"
                           	.section        .note.GNU-stack,"",@progbits
                           
+
+

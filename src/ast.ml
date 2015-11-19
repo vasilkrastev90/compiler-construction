@@ -16,7 +16,7 @@ type exp = Int of int
            | Eq of (exp * exp)
            | Not of exp
            | IfThenElse of (exp * exp * exp)
-           | Apply of (exp * exp)
+           | Apply of (id*exp list)
            | Lambda of (id * exp)
            | Assign of (id * exp)
            | Read of id

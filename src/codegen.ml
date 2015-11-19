@@ -1,4 +1,4 @@
-(*===----------------------------------------------------------------------===
+(*===----------------------------------------------------------------------===1
  * Code Generation
  *===----------------------------------------------------------------------===*)
 
@@ -6,36 +6,51 @@ open Ast
 open Printf
 
 
+let main_function_name = "foo"
 
+let asm_func_prefix id = "\t.globl "^ id ^"
+                          \t.type "^ id ^ ", @function
+                          "^ id ^":\n"
 
+let asm_set_bp = "
+                  \tpushq %rbp
+                  \tmovq    %rsp, %rbp
+                 "
 
-let asm_prefix = ".LC0:
+let asm_main_prefix = ".LC0:
                   \t.string \"%i\\n\"
                   \t.text
                   \t.globl  main
                   \t.type   main, @function
                   main:
-                  LFB0:
                   \tpushq %rbp
                   \tmovq    %rsp, %rbp
                   "
 
 
 
+let asm_func_suffix id argList decList= "\tmov $0, %rax
+                                         \tadd %rsi, %rax
+                                         \tadd $" ^ string_of_int ((List.length decList)*8) ^ ", %rsp     
+                                         \tpop %rsi
+                                         \tadd $" ^ string_of_int ((List.length argList)*8) ^ ", %rsp
+                                         \tpopq %rbp
+                                         \tjmp *%rsi
+                                         \t.size " ^ id ^", .-" ^ id ^"\n" 
 
-let asm_suffix decList = "\tpush %rsi
+let asm_main_suffix decList = "\tpush %rsi
                           \tmovl    $.LC0, %edi
                           \tmovl    $0, %eax
                           \tcall    printf
                           \tpop     %rax\n" ^
                           ("\tadd $" ^ string_of_int ((List.length decList)*8) ^", %rsp\n") ^
                           "\tpopq    %rbp
-                          \tret
-                          \t.LFE0:
+                          \tret 
                           \t.size   main, .-main
-                          \t.ident  \"GCC: (Ubuntu 4.8.4-2ubuntu1~14.04) 4.8.4\"
-                          \t.section        .note.GNU-stack,\"\",@progbits
                           "
+let asm_file_suffix = "\t.ident  \"GCC: (Ubuntu 4.8.4-2ubuntu1~14.04) 4.8.4\"
+                       \t.section        .note.GNU-stack,\"\",@progbits
+                       "
 
 let asm_push_int n = sprintf "\tpush $%d\n" n
 
@@ -90,7 +105,7 @@ let codegen_exp' = codegen_exp hashTable in
 | Eq _ -> failwith "TODO"
 | Not _ -> failwith "TODO"
 | IfThenElse _ -> failwith "TODO"
-| Apply _ -> failwith "TODO"
+| Apply (Id id, explist) -> asm_set_bp ^ (List.map codegen_exp' explist |>  List.fold_left (^) " ") ^ "\t call " ^ id ^ "\n\tpush %rax\n" 
 | Lambda _ -> failwith "TODO"
 | Assign ((Id id),e1) -> codegen_exp' e1 ^ asm_assign_to_local_var hashTable id e1
 | Read _ -> failwith "TODO"
@@ -104,17 +119,26 @@ let codegen_exp_and_pop hashTable  e = codegen_exp hashTable e ^
 let codegen_dec hashTable (declaration:dec) = match declaration with
 | Dec ((Id id),e) -> codegen_exp hashTable e
 
+let addArgsToHashTable hashTable i (argument:arg ) = match argument with
+| Id id -> Hashtbl.add hashTable id ((i+1)*8)
 
-let addToHashTable hashTable i (decl:dec) = match decl with
-| Dec ((Id id), _) -> Hashtbl.add hashTable id ((i+1)*8)
+let addDecsToHashTable hashTable offset i (decl:dec) = match decl with
+| Dec ((Id id), _) -> Hashtbl.add hashTable id ((offset+i+1)*8)
 
 
 let codegen_func (ast:func) = match ast with
-| Function (x,argList,decList,explist) -> 
+| Function (Id "foo",argList,decList,explist) ->
 let hashTable = Hashtbl.create (List.length decList) in
-let _ = List.iteri (addToHashTable hashTable) decList in
-asm_prefix ^ (List.map (codegen_dec hashTable) decList |>  List.fold_left (^) " ") ^ (List.map (codegen_exp_and_pop hashTable) explist |>  List.fold_left (^) " ") ^  (asm_suffix decList)
+let _ = List.iteri (addDecsToHashTable hashTable 0) decList in
+asm_main_prefix ^ (List.map (codegen_dec hashTable) decList |>  List.fold_left (^) " ") ^ (List.map (codegen_exp_and_pop hashTable) explist |>  List.fold_left (^) " ") ^  asm_main_suffix decList
+| Function (Id id,argList,decList,explist) -> 
+let hashTable = Hashtbl.create (List.length decList) in
+let _ = List.iteri (addArgsToHashTable hashTable) argList in
+let _ = List.iteri (addDecsToHashTable hashTable ((List.length argList+1))) decList in
+let asm_suffix = asm_func_suffix id argList decList in
+let asm_prefix = asm_func_prefix id in
+asm_prefix ^ (List.map (codegen_dec hashTable) decList |>  List.fold_left (^) " ") ^ (List.map (codegen_exp_and_pop hashTable) explist |>  List.fold_left (^) " ") ^  asm_suffix
 
-let codegen_progr (ls:program) = match ls with
-| [] -> failwith "Currently not generating code for an empty program"
-| hd::tl -> codegen_func hd
+let rec codegen_progr (ls:program) = match ls with
+| [] -> asm_file_suffix  
+| hd::tl -> codegen_func hd ^"\n\n"^ codegen_progr tl 

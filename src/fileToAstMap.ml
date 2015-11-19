@@ -34,3 +34,7 @@ let createTable  =
          Hashtbl.add fileToAstMap "exp0.k-opt" {ast = [Function(Id "foo",[],[Dec (Id "a",Int 9);Dec(Id "b",Int 6)],[Assign(Id "a", Int 3); Assign(Id "b",Int 2);Int 5; Assign(Id "b", Int 7)])];};
         Hashtbl.add fileToAstMap "expression-local-var.k" {ast = [];};
         Hashtbl.add fileToAstMap "expression-local-var.k-opt" {ast = [];};
+        Hashtbl.add fileToAstMap "fun1.k" {ast = [];};
+        Hashtbl.add fileToAstMap "fun1.k-opt" {ast = [];};
+        Hashtbl.add fileToAstMap "fun2.k" {ast = [];};
+        Hashtbl.add fileToAstMap "fun2.k-opt" {ast = [];};

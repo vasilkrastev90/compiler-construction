@@ -23,20 +23,19 @@ let rec print_exp e n = match e with
 | Eq (e1,e2) ->  print_spaces n; print_string "Eq\n"; print_exp e1 (n+1);  print_exp e2 (n+1)
 | Not e1 ->  print_spaces n; print_string "Not\n"; print_exp e1 (n+1)
 | Assign (id,e1) ->print_spaces n; print_string "=\n";print_id id (n+1); print_exp e1 (n+1);
-| Apply (e1,e2) -> print_spaces n; print_string "Apply\n"; print_exp e1 (n+1); print_exp e2 (n+1)
+| Apply (Id x,es) -> print_spaces n; print_string ("Function Application:" ^ x ^"\n"); print_string "Arguments:\n"; print_es es; print_string "End of arguments\n" 
 | Lambda (id,e1) -> print_spaces n; print_string "Lambda\n";  print_id id (n+1); print_exp e1 (n+1)
 | Read id -> print_spaces n; print_string "Read\n"; print_id id (n+1)
 | Write e1 ->  print_spaces n; print_string "Write\n"; print_exp e1 (n+1)
 | IfThenElse(e1,e2,e3) -> print_spaces n; print_string "If\n"; print_exp e1 (n+1); print_spaces n; print_string "Then\n"; print_exp e2 (n+1); print_spaces n; print_string "Else\n"; print_exp e3 (n+1)  
+and
+print_es es = match es with 
+| [] -> ()
+| hd::tl -> print_exp hd 0; print_string "\n\n\n"; print_es tl
 
 let rec print_args args  = match args with
 | [] -> print_string "\n"
 | (Id x)::tl -> print_string x; print_spaces 1; print_args tl
-
-let rec print_es es n = match es with 
-| [] -> ()
-| hd::tl -> print_exp hd 0; print_string "\n\n\n"; print_es tl 0
-
 
 let print_dec (declaration:dec) = match declaration with
 | Dec (id,e) -> print_string "Dec:\n"; print_exp e 0 
@@ -45,7 +44,7 @@ let print_decs decs = List.iter print_dec decs
 
 
 let  print_func f = match f with
- | Function(Id id,args,decs,es) -> print_string ("Function:" ^ id ^ "\n"); print_args args ; print_decs decs;print_es es 0
+ | Function(Id id,args,decs,es) -> print_string ("Function:" ^ id ^ "\n"); print_args args ; print_decs decs;print_es es
 
  
 let rec print_progr fs = match fs with
