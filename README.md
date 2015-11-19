@@ -7,10 +7,12 @@ This is a parser for a toy programming language designed for a university commit
 ```
 S -> empty | FunList;
 FunList -> empty | Fun FunList
-Fun -> let argList = begin Elist end
-Elist -> empty | E EList
+Fun -> let argList = decl DecList lced begin Elist end
+DecList -> empty | Dec; DecList
+Elist -> empty | E; EList
+Dec -> let ID = E
 ID -> id
-E -> int | E + E | E * E | E - E | E div E | E mod E |E && E | E '||' E | !E | E < E | E > E | E==E  | ID | let ID = E in E | write E | read ID | if E then E else E | apply E E | \ID -> E | (E)
+E -> int | E + E | E * E | E - E | E div E | E mod E |E && E | E '||' E | !E | E < E | E > E | E==E  | ID | ID = E| E | write E | read ID | if E then E else E | apply E E | \ID -> E | (E)
 ```
 
 The plan is:
