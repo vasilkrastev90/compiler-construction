@@ -1,8 +1,10 @@
-let foo = decl lced begin
-                    bar(1)
+let foo = decl let n = 5; let i=1; let p=1 lced begin
+                    { decl lced 
+                      if i>n then
+                      break else
+                      p = i*p;
+                      i=i+1; 
+                      repeat
+                    };
+                    p
                     end  
-
-let bar x = decl lced begin
-                      x+2
-                      end
-

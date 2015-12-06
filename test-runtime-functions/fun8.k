@@ -1,8 +1,7 @@
-let foo = decl lced begin
-                    bar(1)
-                    end 
-
-let bar x = decl lced begin
-                      x+2
-                      end
-
+let foo = decl  let n = 5; let p=1; let i = 1 lced begin  
+while i<(n+1) do { decl lced
+              p = p*i;
+              i = i+1
+             };
+             p  
+end

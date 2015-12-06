@@ -3,9 +3,9 @@ let foo a b c = decl
                 let b =4;
                 let c =5 
                 lced begin
-                     doh(5,4);
+                     doh(3+1,4);
                      blah(12,13);
-                     a+b+bar(1,1)
+                     if 1 && 1 then a+b-bar(1,1) else 5
                      end  
 
 

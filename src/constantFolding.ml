@@ -26,6 +26,7 @@ let rec fold_const_exp e = match e with
 | Assign (id,e1) -> Assign(id, fold_const_exp e1)
 | Read id -> Read id
 | Write e1 -> Write (fold_const_exp e1)
+| x -> x
 and
 fold_const_expls expls = match expls with
 | hd::tl -> fold_const_exp hd :: fold_const_expls tl

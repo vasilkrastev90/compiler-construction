@@ -1,5 +1,5 @@
-let foo = decl lced begin
-                    blah(blah(3)) + bar(bar(1))
+let foo = decl let b =4  lced begin
+                    blah(blah(b)) + bar(bar(b))
                     end 
 
 let bar x = decl lced begin

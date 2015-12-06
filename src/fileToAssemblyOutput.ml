@@ -27,16 +27,17 @@ Hashtbl.add fileToAssemblyMap "exp8.k"{value = 7 };
 Hashtbl.add fileToAssemblyMap "exp9.k"{value = 7 };
 Hashtbl.add fileToAssemblyMap "exp0.k"{value = 7 };
 Hashtbl.add fileToAssemblyMap "expression-local-var.k" {value = 0 };
-Hashtbl.add fileToAssemblyMap "fun1.k" {value = 14};
-Hashtbl.add fileToAssemblyMap "fun2.k" {value = 13};
-Hashtbl.add fileToAssemblyMap "fun3.k" {value = 14};
+Hashtbl.add fileToAssemblyMap "fun1.k" {value = 0};
+Hashtbl.add fileToAssemblyMap "fun2.k" {value = 21};
+Hashtbl.add fileToAssemblyMap "fun3.k" {value = 18};
 Hashtbl.add fileToAssemblyMap "fun4.k" {value = 5};
 Hashtbl.add fileToAssemblyMap "fun5.k" {value = 3};
-Hashtbl.add fileToAssemblyMap "fun6.k" {value = 3};
-Hashtbl.add fileToAssemblyMap "fun7.k" {value = 3};
-Hashtbl.add fileToAssemblyMap "fun8.k" {value = 3};
-Hashtbl.add fileToAssemblyMap "fun9.k" {value = 3};
-Hashtbl.add fileToAssemblyMap "fun10.k" {value = 3};
+Hashtbl.add fileToAssemblyMap "fun6.k" {value = 0};
+Hashtbl.add fileToAssemblyMap "fun7.k" {value = 27};
+Hashtbl.add fileToAssemblyMap "fun8.k" {value = 120};
+Hashtbl.add fileToAssemblyMap "fun9.k" {value = 243};
+Hashtbl.add fileToAssemblyMap "fun10.k" {value = 120};
+Hashtbl.add fileToAssemblyMap "fun11.k" {value = 120};
 Hashtbl.add fileToAssemblyMap "function.k" {value = 1};
 
 

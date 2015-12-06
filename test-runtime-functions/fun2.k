@@ -1,7 +1,6 @@
 let foo =   decl 
-            let d = 5
             lced begin 
-            d+d+3
+            bar(3)
             end                  
 
 

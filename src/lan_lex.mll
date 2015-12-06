@@ -21,6 +21,8 @@ rule read =
    | "mod" {MOD}
    | '('  {LBRACKET}
    | ')'  {RBRACKET}
+   | '{'  {LCURLY}
+   | '}'  {RCURLY}
    | ','  {COMMA}
    | '!'  {NOT}
    | "&&" {AND}
@@ -41,6 +43,12 @@ rule read =
    | ';' {SEMICOLON}
    | "print" {WRITE}
    | "read"  {READ}
+   | "repeat" {REPEAT}
+   | "break"  {BREAK}
+   | "while"  {WHILE}
+   | "do"     {DO}
+   | "for"    {FOR}
+   | "to"     {TO}
    | id  {ID (Lexing.lexeme lexbuf)}
    | _   { raise (SyntaxError ("Unexpected char: " ^ Lexing.lexeme lexbuf))}
    | eof {EOF}

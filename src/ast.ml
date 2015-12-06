@@ -2,6 +2,7 @@ open Printf
 
 type id = Id of string
 
+
 type exp = Int of int
            | IdExp of id
            | Plus of (exp * exp)
@@ -21,9 +22,12 @@ type exp = Int of int
            | Assign of (id * exp)
            | Read of id
            | Write of exp 
+           | Block of (dec list * exp list)
+           | Repeat 
+           | Break
+   and 
+           dec = Dec of (id * exp)          
 
-
-type dec = Dec of (id * exp)          
           
 type arg = id
 

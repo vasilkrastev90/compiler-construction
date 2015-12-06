@@ -27,7 +27,8 @@ let rec print_exp e n = match e with
 | Lambda (id,e1) -> print_spaces n; print_string "Lambda\n";  print_id id (n+1); print_exp e1 (n+1)
 | Read id -> print_spaces n; print_string "Read\n"; print_id id (n+1)
 | Write e1 ->  print_spaces n; print_string "Write\n"; print_exp e1 (n+1)
-| IfThenElse(e1,e2,e3) -> print_spaces n; print_string "If\n"; print_exp e1 (n+1); print_spaces n; print_string "Then\n"; print_exp e2 (n+1); print_spaces n; print_string "Else\n"; print_exp e3 (n+1)  
+| IfThenElse(e1,e2,e3) -> print_spaces n; print_string "If\n"; print_exp e1 (n+1); print_spaces n; print_string "Then\n"; print_exp e2 (n+1); print_spaces n; print_string "Else\n"; print_exp e3 (n+1)
+| _ -> print_string ""
 and
 print_es es = match es with 
 | [] -> ()

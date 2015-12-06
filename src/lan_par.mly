@@ -17,6 +17,8 @@
 %token SEMICOLON
 %token RBRACKET
 %token LBRACKET
+%token LCURLY
+%token RCURLY
 %token ASSIGN
 %token LET
 %token IF
@@ -30,6 +32,12 @@
 %token LCED
 %token EOF
 %token COMMA
+%token REPEAT
+%token WHILE
+%token DO
+%token FOR
+%token TO
+%token BREAK
 %nonassoc ARROW ASSIGN
 %nonassoc ELSE
 %nonassoc LT GT EQ
@@ -96,3 +104,24 @@ exp:
   | var = ID ASSIGN e1=exp  {Assign(Id var,e1)}
   | WRITE; e1=exp  {Write e1}
   | READ;  var=ID  {Read (Id var)}
+  | LCURLY; DECL; dec = declist LCED; expl = explist RCURLY {Block(dec,expl)}
+  | WHILE; cond = exp; DO; LCURLY; DECL; decl=declist; LCED; expl = explist; RCURLY {
+                                                                                 let else_exp = if List.length expl = 0 then Repeat 
+                                                                                 else (List.hd expl) in
+                                                                                 let block_explist = if List.length expl = 0 then []
+                                                                                 else List.tl expl @ [Repeat] in
+                                                                                 Block(decl,(IfThenElse((Not cond),Break,else_exp))::block_explist)}
+  |FOR; exp_init = exp; TO n = exp; DO; LCURLY; DECL; decl = declist; LCED; expl = explist; RCURLY {
+                                                      match exp_init with
+                                                      | Assign (id, exp) -> 
+                                                        let else_exp = if List.length expl = 0 then (Assign(id, Plus (IdExp id, Int 1))) 
+                                                                                 else List.hd expl in
+                                                        let block_explist = if List.length expl = 0 then [Repeat]
+                                                                            else List.tl expl @ [(Assign(id, Plus (IdExp id, Int 1)));Repeat] in
+                                                      Block([],exp_init::[(Block(decl,IfThenElse((Gt(IdExp id,n)),Break,else_exp)::block_explist))])
+                                                       | _ -> let _ = print_string "pattern matching to assignment failed" in
+                                                                      failwith "Syntax Error in for loop initialisation"
+
+                                                                                                } 
+  | REPEAT {Repeat}
+  | BREAK  {Break}
