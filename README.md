@@ -116,6 +116,8 @@ Comparison against javascript when testing local variables implementation: https
 
 Comparison against javascript when testing runtime functions implementation: https://jsfiddle.net/a8ncwekx/2/
 
+Comparison against javascript when testing control for loops: http://jsfiddle.net/1oxv7nhr/
+
 #Data Structure Used
 
 The AST that the parser outputs can be found in the file ast.ml and a print utility function can be found in astUtils.ml.
