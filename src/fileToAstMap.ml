@@ -56,3 +56,7 @@ let createTable  =
         Hashtbl.add fileToAstMap "fun10.k-opt" {ast = [];};
         Hashtbl.add fileToAstMap "fun11.k" {ast = [];};
         Hashtbl.add fileToAstMap "fun11.k-opt" {ast = [];};
+        Hashtbl.add fileToAstMap "loops.k" {ast = [];};
+        Hashtbl.add fileToAstMap "break.k" {ast = [];};
+        Hashtbl.add fileToAstMap "break.k-opt" {ast = [];};
+        Hashtbl.add fileToAstMap "loops.k-opt" {ast = [];};

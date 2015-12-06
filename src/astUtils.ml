@@ -28,20 +28,22 @@ let rec print_exp e n = match e with
 | Read id -> print_spaces n; print_string "Read\n"; print_id id (n+1)
 | Write e1 ->  print_spaces n; print_string "Write\n"; print_exp e1 (n+1)
 | IfThenElse(e1,e2,e3) -> print_spaces n; print_string "If\n"; print_exp e1 (n+1); print_spaces n; print_string "Then\n"; print_exp e2 (n+1); print_spaces n; print_string "Else\n"; print_exp e3 (n+1)
-| _ -> print_string ""
+| Block(decs,es) -> print_string "Block:\n"; print_decs decs;  print_es es; print_string "End Block\n"
+| Repeat -> print_string "repeat\n"
+| Break -> print_string "break\n"
 and
 print_es es = match es with 
 | [] -> ()
 | hd::tl -> print_exp hd 0; print_string "\n\n\n"; print_es tl
-
-let rec print_args args  = match args with
+and
+print_args args  = match args with
 | [] -> print_string "\n"
 | (Id x)::tl -> print_string x; print_spaces 1; print_args tl
-
-let print_dec (declaration:dec) = match declaration with
+and
+print_dec (declaration:dec) = match declaration with
 | Dec (id,e) -> print_string "Dec:\n"; print_exp e 0 
-
-let print_decs decs = List.iter print_dec decs
+and
+print_decs decs = List.iter print_dec decs
 
 
 let  print_func f = match f with

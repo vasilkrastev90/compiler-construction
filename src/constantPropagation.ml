@@ -2,6 +2,29 @@ open Ast
 open AstUtils
 
 
+(*let addDecsToHash decs hashTable = match decs with
+| Dec((Id id,Int n), Int n):: tl -> Hashtbl.add hashTable id n; addDecsToHash tl hashTable
+| Dec::tl -> addDecsToHash tl
+| [] -> () *)
+
+let rec check_for_assignment hashTable (e:Ast.exp )= match e with
+| Plus (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Minus (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Times (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Div (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Mod (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| And (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Or (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Gt (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Lt (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Eq (e1,e2) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2
+| Not (e1) -> check_for_assignment hashTable e1
+| IfThenElse (e1,e2,e3) -> check_for_assignment hashTable e1; check_for_assignment hashTable e2; check_for_assignment hashTable e3
+| Apply (Id id, es) -> List.iter (check_for_assignment hashTable) es
+| Assign (Id x,e1)  -> if Hashtbl.mem hashTable x then Hashtbl.remove hashTable x else () 
+| Write e -> check_for_assignment hashTable e
+| _ -> ()
+
 let rec const_prop_exp hashTable exp = let const_prop_exp' = const_prop_exp hashTable in
  match exp with
 | Int n -> Int (n)
@@ -21,9 +44,15 @@ let rec const_prop_exp hashTable exp = let const_prop_exp' = const_prop_exp hash
                                           e
 | Assign((Id id), e')  as e -> let _ = Hashtbl.remove hashTable id in
                                        e
+| Block(decs,es) -> if List.length decs =0 then
+                    let _ = List.iter (check_for_assignment hashTable) es in
+                    Block(decs,const_prop_expls hashTable es)
+                    else let _ = Hashtbl.clear hashTable in
+                         Block(decs,es)
+                          
 | t -> t
-
-let rec const_prop_expls hashTable expls = match expls with
+and
+const_prop_expls hashTable expls = match expls with
 | hd::tl -> let hd' = const_prop_exp hashTable hd in 
                 hd' :: const_prop_expls hashTable tl
 | [] -> []

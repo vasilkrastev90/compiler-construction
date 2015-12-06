@@ -38,6 +38,8 @@ Hashtbl.add fileToAssemblyMap "fun8.k" {value = 120};
 Hashtbl.add fileToAssemblyMap "fun9.k" {value = 243};
 Hashtbl.add fileToAssemblyMap "fun10.k" {value = 120};
 Hashtbl.add fileToAssemblyMap "fun11.k" {value = 120};
+Hashtbl.add fileToAssemblyMap "loops.k" {value = 120};
+Hashtbl.add fileToAssemblyMap "break.k" {value = 1};
 Hashtbl.add fileToAssemblyMap "function.k" {value = 1};
 
 

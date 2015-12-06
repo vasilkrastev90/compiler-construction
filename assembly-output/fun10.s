@@ -11,7 +11,11 @@ main:
  	push $5
 	push $1
 	push $1
- .L0B:
+ 	push $5
+	 pop %rsi
+	push $1
+	 pop %rsi
+.L0B:
   	 push -16(%rbp)
 	 push -8(%rbp)
 	pop %rdi
@@ -59,7 +63,11 @@ main:
 	 push %rsi
 .L0E:
 	 pop %rsi
-	push $1
+	push $5
+	 pop %rsi
+	 push -16(%rbp)
+	 pop %rsi
+	 push -24(%rbp)
 	 pop %rsi
 	push %rsi
 	movl    $.LC0, %edi

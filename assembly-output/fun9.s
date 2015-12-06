@@ -60,7 +60,7 @@ main:
 	 push %rsi
 .L0E:
 	 pop %rsi
-	push $1
+	 push -24(%rbp)
 	 pop %rsi
 	push %rsi
 	movl    $.LC0, %edi
