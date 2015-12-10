@@ -8,7 +8,24 @@
 main:
 	pushq %rbp
 	movq  %rsp, %rbp
-  	pushq %rbp
+ 	push $5
+ .L0B:
+  	push $10
+	pop %rsi
+	push %rsi
+	movl    $.LC0, %edi
+	movl    $0, %eax
+	call    printf
+	 pop %rsi
+	add $0, %rsp
+	push $0
+	jmp .L0E 
+	 pop %rsi
+	add $0, %rsp
+	 push %rsi
+.L0E:
+	 pop %rsi
+	pushq %rbp
  	push $1
 mov %rsp, %rsi
 	add $8, %rsi
@@ -21,7 +38,7 @@ mov %rsp, %rsi
 	movl    $0, %eax
 	call    printf
 	pop     %rax
-	add $0, %rsp
+	add $8, %rsp
 	popq    %rbp
 	ret
 	.size   main, .-main

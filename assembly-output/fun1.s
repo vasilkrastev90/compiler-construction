@@ -29,21 +29,7 @@ mov %rsp, %rsi
 	 call blah
 	push %rax
 	 pop %rsi
-	push $1
-	push $1
-	pop %rdi
-	pop %rsi
-	and %rdi, %rsi
-	push %rsi
-	pop %rsi
-	cmp $0, %rsi
-	je .L0
-	 push -8(%rbp)
-	 push -16(%rbp)
-	pop %rdi
-	pop %rsi
-	add %rdi, %rsi
-	push %rsi
+	push $7
 	pushq %rbp
  	push $1
 	push $1
@@ -57,10 +43,6 @@ mov %rsp, %rsi
 	neg %rdi
 	add %rdi, %rsi
 	push %rsi
-	jmp .L1
-.L0:
-	push $5
-.L1:
 	 pop %rsi
 	push %rsi
 	movl    $.LC0, %edi

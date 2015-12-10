@@ -50,7 +50,9 @@ let rec const_prop_exp hashTable exp = let const_prop_exp' = const_prop_exp hash
                     else let _ = Hashtbl.clear hashTable in
                          Block(decs,es)
                           
-| t -> t
+| Write (IdExp (Id x)) -> if Hashtbl.mem hashTable x then Write (Int (Hashtbl.find hashTable x)) else Write (IdExp (Id x))
+| Write e1 -> Write (const_prop_exp' e1)
+|t -> t
 and
 const_prop_expls hashTable expls = match expls with
 | hd::tl -> let hd' = const_prop_exp hashTable hd in 

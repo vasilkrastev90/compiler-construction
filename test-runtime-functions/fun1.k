@@ -14,7 +14,10 @@ let bar d e = decl
               let b = 2 
               lced     
               begin
-                      b+a+d+e
+                   if 1 then   
+                   b+a+d+e
+                   else 
+                   d+d+d+d
               end 
 
 let doh g e = decl lced begin g+e end  

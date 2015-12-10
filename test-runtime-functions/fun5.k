@@ -1,4 +1,8 @@
-let foo = decl lced begin
+let foo = decl let a = 5 lced begin
+                    while 1 do {decl lced 
+                    print (a+a);
+                    break
+                    }; 
                     bar(1)
                     end 
 

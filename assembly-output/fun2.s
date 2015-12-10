@@ -32,12 +32,31 @@ mov %rsp, %rsi
 bar:
  	push $3
 	push $4
- 	push $7
+ .L0B:
+  	 push -24(%rbp)
+	 push -32(%rbp)
+	pop %rdi
+	pop %rsi
+	add %rdi, %rsi
+	push %rsi
 	 push -8(%rbp)
 	pop %rdi
 	pop %rsi
 	imul %rdi, %rsi
 	push %rsi
+	pop %rsi
+	mov %rsi, -8(%rbp)
+	push %rsi
+	 pop %rsi
+	add $0, %rsp
+	push $0
+	jmp .L0E 
+	 pop %rsi
+	add $0, %rsp
+	 push %rsi
+.L0E:
+	 pop %rsi
+	 push -8(%rbp)
 	 pop %rsi
 	mov $0, %rax
 	add %rsi, %rax
